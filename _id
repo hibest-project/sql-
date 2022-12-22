@@ -800,7 +800,12 @@ INSERT INTO inquiry_board( title, content, date, email) VALUES('다른 계정에
 INSERT INTO inquiry_board( title, content, date, email) VALUES('푸쉬 알림 취소어떻게하죠 ?', '귀찮아요 ','2022-12-14','jefgdfv@naver.com');
 
 -- 질문 댓글 2
-INSERT INTO comments(text, image ) VALUES('취소는 불가능 합니다','asdasdas');
+-- 질문 댓글 2
+insert  comments (inquiryid, id, text, image) VALUES ('1' , 'admin','댓글입니다1','이미지1');
+insert  comments (inquiryid, id, text, image) VALUES ('2' , 'admin','댓글입니다2','이미지2');
+insert  comments (inquiryid, id, text, image) VALUES ('3' , 'admin','댓글입니다3','이미지3');
+insert  comments (inquiryid, id, text, image) VALUES ('4' , 'admin','댓글입니다4','이미지4');
+insert  comments (inquiryid, id, text, image) VALUES ('5' , 'admin','댓글입니다5','이미지5');
 
 
 -- 자주묻는 질문
