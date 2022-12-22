@@ -34,7 +34,7 @@ DROP TABLE mentoring;
 -- 멘토
 DROP TABLE mentor;
 -- 질문댓글2
-DROP TABLE comments;
+DROP TABLE;
 -- 1:1질문
 DROP TABLE inquiry_board;
 -- 회원
@@ -278,27 +278,27 @@ CREATE TABLE mentoring_grade (
 
 -- 1:1질문
 CREATE TABLE inquiry_board (
-	inquiry_id INT(10)      NOT NULL AUTO_INCREMENT, -- 질문번호
+	inquiryid INT(10)      NOT NULL AUTO_INCREMENT, -- 질문번호
 	id         VARCHAR(100) NULL,     -- 회원 아이디
 	title      VARCHAR(100) NULL,     -- 질문제목
 	content    VARCHAR(500) NULL,     -- 질문내용
 	date       DATE         NULL,     -- 작성일자
 	email      VARCHAR(100) NULL,      -- 이메일
     PRIMARY KEY (
-			inquiry_id -- 질문번호
+			inquiryid -- 질문번호
 		)
 )default charset =  utf8;
 
 -- 질문댓글2
 CREATE TABLE comments (
-	comments_id INT(10)      NOT NULL AUTO_INCREMENT, -- 댓글번호
-	inquiry_id  INT(10)      NULL,     -- 질문번호
+	commentsid INT(10)      NOT NULL AUTO_INCREMENT, -- 댓글번호
+	inquiryid  INT(10)      NULL,     -- 질문번호
 	id          VARCHAR(30)  NULL,     -- 관리자 아이디
-	admin_id    INT(10)      NULL,     -- 관리자아이디
+	adminid    INT(10)      NULL,     -- 관리자아이디
 	text        VARCHAR(100) NULL,     -- 댓글내용
 	image       VARCHAR(30)  NULL,      -- 댓글이미지
     PRIMARY KEY (
-			comments_id -- 댓글번호
+			commentsid -- 댓글번호
 		)
 )default charset =  utf8;
 -- 자주묻는질문
@@ -589,10 +589,10 @@ ALTER TABLE comments
 ALTER TABLE comments
 	ADD CONSTRAINT FK_inquiry_board_TO_comments -- 1:1질문 -> 질문댓글2
 		FOREIGN KEY (
-			inquiry_id -- 질문번호
+			inquiryid -- 질문번호
 		)
 		REFERENCES inquiry_board ( -- 1:1질문
-			inquiry_id -- 질문번호
+			inquiryid -- 질문번호
 		);
         
 -- 멤버 데이터
