@@ -776,15 +776,22 @@ INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'acc', '강�
 INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'acc', '강의가 너무 알차다9', 9 );
 
 -- 멘토링 별점
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 0 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'abb', '강의가 너무 알차다2', 9 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'abb', '강의가 너무 알차다3', 7);
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'abc', '강의가 너무 알차다4', 9);
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'abc', '강의가 너무 알차다5', 6);
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'abc', '강의가 너무 알차다6', 5 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'acc', '강의가 너무 알차다7', 8 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'acc', '강의가 너무 알차다8', 8 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'acc', '강의가 너무 알차다9', 9 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 5 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'abb', '강의가 너무 알차다2', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'abb', '강의가 너무 알차다3', 5);
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(4, 'abb', '강의가 너무 알차다4', 2);
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'abc', '강의가 너무 알차다5', 2);
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'abc', '강의가 너무 알차다6', 5);
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'abc', '강의가 너무 알차다7', 2 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(4, 'abc', '강의가 너무 알차다8', 5 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'acc', '강의가 너무 알차다9', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'acc', '강의가 너무 알차다10', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'acc', '강의가 너무 알차다11', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(4, 'acc', '강의가 너무 알차다12', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다13', 4 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다14', 2 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다15', 5 );
+INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다16', 2 );
 
 -- 1대1 질문
 INSERT INTO inquiry_board( title, content, date, email) VALUES('강의를 취소하고싶은데 어떻게 해야하나요 ?', '강의가 너무 부실합니다 ','2022-12-11','qwass@naver.com');
