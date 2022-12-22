@@ -223,6 +223,8 @@ CREATE TABLE mentor (
 	email         VARCHAR(100) NULL,     -- 멘토 이메일
 	name          VARCHAR(20)  NULL,     -- 멘토 이름
 	phone         VARCHAR(13)  NULL,     -- 멘토 전화번호
+    	job			  VARCHAR(30)  NULL,     -- 멘토 직무
+    	current 	  VARCHAR(30)  NULL,     -- 멘토 현직
 	content       VARCHAR(150) NULL,     -- 멘토 소개
 	career        VARCHAR(150) NULL,      -- 멘토 경력
     PRIMARY KEY (
@@ -746,20 +748,20 @@ INSERT INTO recomment(comment_id,content,image ) VALUES(10,'감사합니다7',''
 INSERT INTO admin(id,password ) VALUES('admin','1234');
 
 -- 멘토
-INSERT INTO mentor(id, kategorie_num, email, name, phone, content, career) VALUES('abb', 1, 'gasdfd@naver.com', '멘토1', '010-1111-1111', '저는멘토1입니다', '백엔드2년' );
-INSERT INTO mentor(id, kategorie_num, email, name, phone, content, career) VALUES('abc', 1, 'gasdfd@naver.com', '멘토2', '010-1111-1111', '저는멘토2입니다', '백엔드3년' );
-INSERT INTO mentor(id, kategorie_num, email, name, phone, content, career) VALUES('acc', 2, 'gasdfd@naver.com', '멘토3', '010-1111-1111', '저는멘토3입니다', '백엔드4년' );
-INSERT INTO mentor(id, kategorie_num, email, name, phone, content, career) VALUES('add', 2, 'gasdfd@naver.com', '멘토4', '010-1111-1111', '저는멘토4입니다', '백엔드5년' );
+INSERT INTO mentor(id, kategorie_num, email, name, phone, job, current, content, career) VALUES('abb', 1, 'gasdfd@naver.com', '멘토1', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는멘토1입니다', '백엔드2년' );
+INSERT INTO mentor(id, kategorie_num, email, name, phone, job, content, career) VALUES('abc', 1, 'gasdfd@naver.com', '멘토2', '010-1111-1111', '프론트엔드/웹퍼블리셔', '저는멘토2입니다', '프론트엔드3년' );
+INSERT INTO mentor(id, kategorie_num, email, name, phone, job, current, content, career) VALUES('acc', 2, 'gasdfd@naver.com', '멘토3', '010-1111-1111', '백엔드/서버개발자', '카카오', '저는멘토3입니다', '백엔드4년' );
+INSERT INTO mentor(id, kategorie_num, email, name, phone, job, content, career) VALUES('add', 2, 'gasdfd@naver.com', '멘토4', '010-1111-1111', '데이터 엔지니어', '저는멘토4입니다', '백엔드5년' );
 
 -- 멘토링
-INSERT INTO mentoring( id, title, content, rule, time, price) 
-VALUES('abb',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
-INSERT INTO mentoring( id, title, content, rule, time, price) 
-VALUES('abc',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
-INSERT INTO mentoring( id, title, content, rule, time, price) 
-VALUES('acc',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
-INSERT INTO mentoring( id, title, content, rule, time, price) 
-VALUES('add',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
+INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+VALUES(1, 'abb',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '1우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
+INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+VALUES(2, 'abc',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '2우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
+INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+VALUES(3, 'acc',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '3우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
+INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+VALUES(4, 'add',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '4우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
 
 
 -- 강의 별점
