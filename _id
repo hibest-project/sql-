@@ -34,7 +34,7 @@ DROP TABLE mentoring;
 -- 멘토
 DROP TABLE mentor;
 -- 질문댓글2
-DROP TABLE;
+DROP TABLE comments;
 -- 1:1질문
 DROP TABLE inquiry_board;
 -- 회원
@@ -596,10 +596,11 @@ ALTER TABLE comments
 		);
         
 -- 멤버 데이터
-INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('김개똥', 'abc', 'abc', 'abc@abc.com', '2000-12-11', '서울', 'M', '010-0000-0000');
-INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('한복순', 'abb', 'abb', 'abb@abb.com', '2002-03-11', '경기', 'F', '010-1111-2222');
-INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('이똑순', 'acc', 'acc', 'acc@acc.com', '2004-06-11', '경기', 'F', '010-2222-3333');
-INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('최복남', 'add', 'add', 'add@add.com', '2006-09-11', '경기', 'M', '010-4444-5555');
+-- INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('김개똥', 'abc', 'abc', 'abc@abc.com', '2000-12-11', '서울', 'M', '010-0000-0000');
+-- INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('한복순', 'abb', 'abb', 'abb@abb.com', '2002-03-11', '경기', 'F', '010-1111-2222');
+-- INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('이똑순', 'acc', 'acc', 'acc@acc.com', '2004-06-11', '경기', 'F', '010-2222-3333');
+-- INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('최복남', 'add', 'add', 'add@add.com', '2006-09-11', '경기', 'M', '010-4444-5555');
+
 
 -- 강사 데이터
 INSERT INTO teacher(teacher_id, name, email, phone) VALUES(1, '개나리', 'teacher1@teacher.com', '010-1234-5678');
@@ -704,7 +705,7 @@ INSERT INTO listener(id,lecture_id ) VALUES('add',3);
 INSERT INTO listener(id,lecture_id ) VALUES('abb',4);
 INSERT INTO listener(id,lecture_id ) VALUES('abc',4);
 
--- 질문개시판
+-- 질문게시판
 INSERT INTO qna_board(teacher_id, listener_id, title, content, image, date) VALUES(1, 1, '질문있습니다1.', '코딩을 어떻게하는고거죠', '','2022-12-11');
 INSERT INTO qna_board(teacher_id, listener_id, title, content, image, date) VALUES(1, 1, '질문있습니다2.', '코딩을 어떻게하는고거죠', '','2022-12-12');
 INSERT INTO qna_board(teacher_id, listener_id, title, content, image, date) VALUES(1, 3, '질문있습니다3.', '코딩을 어떻게하는고거죠', '','2022-12-13');
@@ -794,10 +795,11 @@ INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '
 INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다16', 2 );
 
 -- 1대1 질문
-INSERT INTO inquiry_board( title, content, date, email) VALUES('강의를 취소하고싶은데 어떻게 해야하나요 ?', '강의가 너무 부실합니다 ','2022-12-11','qwass@naver.com');
-INSERT INTO inquiry_board( title, content, date, email) VALUES('강의 보유기간 질문', '강의는 영구소장이 불가능한가요 ?','2022-12-12','ncqwksc@naver.com');
-INSERT INTO inquiry_board( title, content, date, email) VALUES('다른 계정에서 이용하고 싶어요', '어떻게하나요','2022-12-13','fjhdfv@naver.com');
-INSERT INTO inquiry_board( title, content, date, email) VALUES('푸쉬 알림 취소어떻게하죠 ?', '귀찮아요 ','2022-12-14','jefgdfv@naver.com');
+INSERT INTO inquiry_board(id, title, content, date, email) VALUES('abc','강의를 취소하고싶은데 어떻게 해야하나요 ?', '강의가 너무 부실합니다 ','2022-12-11','qwass@naver.com');
+INSERT INTO inquiry_board(id, title, content, date, email) VALUES('abc','강의 보유기간 질문', '강의는 영구소장이 불가능한가요 ?','2022-12-12','ncqwksc@naver.com');
+INSERT INTO inquiry_board(id, title, content, date, email) VALUES('acc','다른 계정에서 이용하고 싶어요', '어떻게하나요','2022-12-13','fjhdfv@naver.com');
+INSERT INTO inquiry_board(id, title, content, date, email) VALUES('abc','푸쉬 알림 취소어떻게하죠 ?', '귀찮아요 ','2022-12-14','jefgdfv@naver.com');
+
 
 -- 질문 댓글 2
 -- 질문 댓글 2
