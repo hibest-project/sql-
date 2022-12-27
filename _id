@@ -17,8 +17,12 @@ DROP TABLE listen_lecture;
 DROP TABLE recomment;
 -- 댓글
 DROP TABLE comment;
--- 질문게시판
-DROP TABLE qna_board;
+-- 커뮤니티
+DROP TABLE community;
+-- 선생님 답글
+DROP TABLE t_comment;
+-- 수강평
+DROP TABLE review;
 -- 수강생
 DROP TABLE listener;
 -- 강의 별점
@@ -40,9 +44,9 @@ DROP TABLE inquiry_board;
 -- 회원
 DROP TABLE member;
 -- d카테고리
-DROP TABLE dtail_kategorie;
+DROP TABLE detail_categorie;
 -- 카테고리
-DROP TABLE kategorie;
+DROP TABLE categorie;
 -- 관리자
 DROP TABLE admin;
 -- 자주묻는질문
@@ -94,88 +98,70 @@ CREATE TABLE listen_lecture (
 
 
 
--- 질문게시판
-CREATE TABLE qna_board (
-	board_id    INT(5)       NOT NULL AUTO_INCREMENT, -- 게시글번호
-	teacher_id  INT(5)       NULL,     -- 강사아이디
-	listener_id INT(5)       NULL,     -- 새 컬럼5
-	title       VARCHAR(30)  NULL,     -- 새 컬럼
-	content     VARCHAR(500) NULL,     -- 새 컬럼2
-	image       VARCHAR(30)  NULL,     -- 새 컬럼3
-	date        DATE         NULL,      -- 새 컬럼4
-    PRIMARY KEY (
-			board_id -- 게시글번호
-		)
-)default charset =  utf8;
+-- 커뮤니티
+CREATE TABLE community (
+	num         INT(5)       NOT NULL AUTO_INCREMENT, -- 게시글번호
+	listener_id INT(5)       NULL,     -- 수강생ID
+	lecture_id  INT(5)       NULL,     -- 강의 아이디
+	title       VARCHAR(30)  NULL,     -- 제목
+	content     VARCHAR(500) NULL,     -- 내용
+	fileName       VARCHAR(30)  NULL,     -- 이미지
+	date        DATE         NULL,      -- 날짜
+    PRIMARY KEY (num)
+);
 
 -- 강사
 CREATE TABLE teacher (
 	teacher_id INT(5)       NOT NULL AUTO_INCREMENT, -- 강사아이디
 	id         VARCHAR(100) NULL,     -- 회원 아이디
-	name       VARCHAR(20)  NULL,     -- 이름
+	teacher_name       VARCHAR(20)  NULL,     -- 이름
 	email      VARCHAR(100) NULL,     -- 이메일
 	phone      VARCHAR(13)  NULL,      -- 전화번호
-    PRIMARY KEY (
-			teacher_id -- 강사아이디
-		)
+    PRIMARY KEY (teacher_id)
 )default charset =  utf8;
 
 -- 댓글
 CREATE TABLE comment (
-	comment_id INT(5)       NOT NULL AUTO_INCREMENT, -- 댓글번호
-	board_id   INT(5)       NULL,     -- 게시글번호
-	id         VARCHAR(100) NULL,     -- 회원 아이디
-	teacher_id INT(5)       NULL,     -- 강사아이디
-	content    VARCHAR(500) NULL,     -- 내용
-	date       DATE         NULL,     -- 날짜
-	image      VARCHAR(30)  NULL,      -- 이미지
-    PRIMARY KEY (
-			comment_id -- 댓글번호
-		)
-)default charset =  utf8;
+	com_num     INT(5)       NOT NULL AUTO_INCREMENT, -- 댓글번호
+	num         INT(5)       NULL,     -- 게시글번호
+	listener_id INT(5)       NULL,     -- 수강생ID
+	teacher_id  INT(5)       NULL,     -- 강사아이디
+	content     VARCHAR(500) NULL,     -- 내용
+	date        DATE         NULL,     -- 날짜
+	image       VARCHAR(30)  NULL,      -- 이미지
+    PRIMARY KEY (com_num)
+);
 
 -- 강의
 CREATE TABLE lecture (
 	lecture_id    INT(5)       NOT NULL AUTO_INCREMENT, -- 강의 아이디
-	kategorie_num INT(5)       NULL,     -- 카테고리 번호
-	dtail_num     INT(5)       NULL,     -- 세부카테고리 번호
+	categorie_num INT(5)       NULL,     -- 카테고리 번호
+	detail_num     INT(5)       NULL,     -- 세부카테고리 번호
 	teacher_id    INT(5)       NULL,     -- 강사아이디
-	name          VARCHAR(50)  NULL,     -- 강의 이름
-	price         VARCHAR(10)  NULL,     -- 가격
-	video         VARCHAR(50)  NULL,     -- 영상
-	image         VARCHAR(50)  NULL,     -- 이미지
-	date   DATE         NULL,     -- 수강기간
-	discount      INT(2)       NULL,     -- 할인율
-	about_lecture  VARCHAR(500) NULL,     -- 강의소개
-	introduce     VARCHAR(500) NULL,     -- 강사소개
-	curriculum    VARCHAR(500) NULL,      -- 커리큘럼
-    PRIMARY KEY (
-			lecture_id -- 강의 아이디
-		)
-)default charset =  utf8;
+	title         VARCHAR(50)  NULL,     -- 강의 이름
+	price         int(6)       NULL,     -- 가격
+	discount      INT(3)       NULL,     -- 할인율
+	level         varchar(10)  NULL,     -- 난이도
+	date          VARCHAR(10)  NULL,     -- 수강기간
+	about_lecture VARCHAR(500) NULL,     -- 강의소개
+	fileName         VARCHAR(50)  NULL,      -- 이미지
+    PRIMARY KEY (lecture_id)
+);
 
 
 -- 카테고리
-CREATE TABLE kategorie (
-	kategorie_num INT(5)      NOT NULL AUTO_INCREMENT, -- 카테고리 번호
-	name          VARCHAR(50) NULL,      -- 카테고리이름
-    PRIMARY KEY (
-			kategorie_num -- 카테고리 번호
-		)
-)default charset =  utf8;
-
-
-
-
+CREATE TABLE categorie (
+	categorie_num INT(5)      NOT NULL AUTO_INCREMENT, -- 카테고리 번호
+	cname          VARCHAR(50) NULL,      -- 카테고리이름
+    PRIMARY KEY (categorie_num)
+);
 -- d카테고리
-CREATE TABLE dtail_kategorie (
-	dtail_num     INT(5)      NOT NULL AUTO_INCREMENT, -- 세부카테고리 번호
-	kategorie_num INT(5)      NULL,     -- 카테고리 번호
-	title         VARCHAR(50) NULL,      -- 디테일 이름
-    PRIMARY KEY (
-			dtail_num -- 세부카테고리 번호
-		)
-)default charset =  utf8;
+CREATE TABLE detail_categorie (
+	detail_num     INT(5)      NOT NULL AUTO_INCREMENT, -- 세부카테고리 번호
+	categorie_num INT(5)      NULL,     -- 카테고리 번호
+	dname          VARCHAR(50) NULL,      -- 디테일 이름
+    PRIMARY KEY (detail_num)
+);
 
 
 
@@ -194,14 +180,14 @@ CREATE TABLE listener (
 
 -- 대댓글
 CREATE TABLE recomment (
-	recomment_id INT(5)       NOT NULL AUTO_INCREMENT, -- 새 컬럼
-	comment_id   INT(5)       NULL,     -- 댓글번호
-	content      VARCHAR(500) NULL,     -- 내용
-	image        VARCHAR(30)  NULL ,     -- 이미지
-    PRIMARY KEY (
-			recomment_id -- 새 컬럼
-		)
-)default charset =  utf8;
+	rec_num     INT(5)       NOT NULL AUTO_INCREMENT, -- 대댓글번호
+	com_num     INT(5)       NULL,     -- 댓글번호
+	listener_id INT(5)       NULL,     -- 수강생ID
+	teacher_id  INT(5)       NULL,     -- 강사아이디
+	content     VARCHAR(500) NULL,     -- 내용
+	image       VARCHAR(30)  NULL,      -- 이미지
+    PRIMARY KEY (rec_num)
+);
 
 
 
@@ -219,7 +205,7 @@ CREATE TABLE admin (
 CREATE TABLE mentor (
 	mentor_id     INT(5)       NOT NULL AUTO_INCREMENT, -- 멘토 아이디
 	id            VARCHAR(100) NULL,     -- 회원 아이디
-	kategorie_num INT(5)       NULL,     -- 카테고리 번호
+	categorie_num INT(5)       NULL,     -- 카테고리 번호
 	email         VARCHAR(100) NULL,     -- 멘토 이메일
 	name          VARCHAR(20)  NULL,     -- 멘토 이름
 	phone         VARCHAR(13)  NULL,     -- 멘토 전화번호
@@ -312,6 +298,27 @@ CREATE TABLE q_n_board (
 		)
 )default charset =  utf8;
 
+-- 수강평
+CREATE TABLE review (
+	review_id   INT(5)       NOT NULL AUTO_INCREMENT, -- 수강평번호
+	listener_id INT(5)       NULL,     -- 수강생ID
+	lecture_id  INT(5)       NULL,     -- 강의 아이디
+	content     VARCHAR(500) NULL,     -- 내용
+	date        DATE         NULL,     -- 날짜
+	score       INT(11)      NULL,      -- 별점
+    PRIMARY KEY (review_id)
+);
+
+-- 선생님답글
+CREATE TABLE t_comment (
+	tcomment   INT(5)       NOT NULL AUTO_INCREMENT, -- 답글번호
+	review_id  INT(5)       NULL,     -- 수강평번호
+	teacher_id INT(5)       NULL,     -- 강사아이디
+	content    VARCHAR(500) NULL,     -- 내용
+	date       DATE         NULL,      -- 날짜
+    PRIMARY KEY (tcomment)
+);
+
 
 
 
@@ -355,24 +362,25 @@ ALTER TABLE listen_lecture
 			lecture_id -- 강의 아이디
 		);
 
--- 질문게시판
-ALTER TABLE qna_board
-	ADD CONSTRAINT FK_teacher_TO_qna_board -- 강사 -> 질문게시판
+-- 커뮤니티
+ALTER TABLE community
+	ADD CONSTRAINT FK_listener_TO_community -- 수강생 -> 커뮤니티
 		FOREIGN KEY (
-			teacher_id -- 강사아이디
-		)
-		REFERENCES teacher ( -- 강사
-			teacher_id -- 강사아이디
-		);
-
--- 질문게시판
-ALTER TABLE qna_board
-	ADD CONSTRAINT FK_listener_TO_qna_board -- 수강생 -> 질문게시판
-		FOREIGN KEY (
-			listener_id -- 새 컬럼5
+			listener_id -- 수강생ID
 		)
 		REFERENCES listener ( -- 수강생
-			listener_id -- 새 컬럼
+			listener_id -- 수강생ID
+		);
+		
+
+-- 커뮤니티
+ALTER TABLE community
+	ADD CONSTRAINT FK_lecture_TO_community -- 강의 -> 커뮤니티
+		FOREIGN KEY (
+			lecture_id -- 강의 아이디
+		)
+		REFERENCES lecture ( -- 강의
+			lecture_id -- 강의 아이디
 		);
 
 -- 강사
@@ -387,22 +395,22 @@ ALTER TABLE teacher
 
 -- 댓글
 ALTER TABLE comment
-	ADD CONSTRAINT FK_qna_board_TO_comment -- 질문게시판 -> 댓글
+	ADD CONSTRAINT FK_community_TO_comment -- 커뮤니티 -> 댓글
 		FOREIGN KEY (
-			board_id -- 게시글번호
+			num -- 게시글번호
 		)
-		REFERENCES qna_board ( -- 질문게시판
-			board_id -- 게시글번호
+		REFERENCES community ( -- 커뮤니티
+			num -- 게시글번호
 		);
 
 -- 댓글
 ALTER TABLE comment
-	ADD CONSTRAINT FK_member_TO_comment -- 회원 -> 댓글
+	ADD CONSTRAINT FK_listener_TO_comment -- 수강생 -> 댓글
 		FOREIGN KEY (
-			id -- 회원 아이디
+			listener_id -- 수강생ID
 		)
-		REFERENCES member ( -- 회원
-			id -- 회원 아이디
+		REFERENCES listener ( -- 수강생
+			listener_id -- 수강생ID
 		);
 
 -- 댓글
@@ -417,12 +425,12 @@ ALTER TABLE comment
 
 -- 강의
 ALTER TABLE lecture
-	ADD CONSTRAINT FK_dtail_kategorie_TO_lecture -- d카테고리 -> 강의
+	ADD CONSTRAINT FK_detail_categorie_TO_lecture -- d카테고리 -> 강의
 		FOREIGN KEY (
-			dtail_num -- 세부카테고리 번호
+			detail_num -- 세부카테고리 번호
 		)
-		REFERENCES dtail_kategorie ( -- d카테고리
-			dtail_num -- 세부카테고리 번호
+		REFERENCES detail_categorie ( -- d카테고리
+			detail_num -- 세부카테고리 번호
 		);
 
 -- 강의
@@ -437,22 +445,22 @@ ALTER TABLE lecture
 
 -- 강의
 ALTER TABLE lecture
-	ADD CONSTRAINT FK_kategorie_TO_lecture -- 카테고리 -> 강의
+	ADD CONSTRAINT FK_categorie_TO_lecture -- 카테고리 -> 강의
 		FOREIGN KEY (
-			kategorie_num -- 카테고리 번호
+			categorie_num -- 카테고리 번호
 		)
-		REFERENCES kategorie ( -- 카테고리
-			kategorie_num -- 카테고리 번호
+		REFERENCES categorie ( -- 카테고리
+			categorie_num -- 카테고리 번호
 		);
 
 -- d카테고리
-ALTER TABLE dtail_kategorie
-	ADD CONSTRAINT FK_kategorie_TO_dtail_kategorie -- 카테고리 -> d카테고리
+ALTER TABLE detail_categorie
+	ADD CONSTRAINT FK_categorie_TO_detail_categorie -- 카테고리 -> d카테고리
 		FOREIGN KEY (
-			kategorie_num -- 카테고리 번호
+			categorie_num -- 카테고리 번호
 		)
-		REFERENCES kategorie ( -- 카테고리
-			kategorie_num -- 카테고리 번호
+		REFERENCES categorie ( -- 카테고리
+			categorie_num -- 카테고리 번호
 		);
 
 -- 수강생
@@ -479,10 +487,28 @@ ALTER TABLE listener
 ALTER TABLE recomment
 	ADD CONSTRAINT FK_comment_TO_recomment -- 댓글 -> 대댓글
 		FOREIGN KEY (
-			comment_id -- 댓글번호
+			com_num -- 댓글번호
 		)
 		REFERENCES comment ( -- 댓글
-			comment_id -- 댓글번호
+			com_num -- 댓글번호
+		);
+-- 대댓글
+ALTER TABLE recomment
+	ADD CONSTRAINT FK_teacher_TO_recomment -- 강사 -> 대댓글
+		FOREIGN KEY (
+			teacher_id -- 강사아이디
+		)
+		REFERENCES teacher ( -- 강사
+			teacher_id -- 강사아이디
+		);	
+-- 대댓글
+ALTER TABLE recomment
+	ADD CONSTRAINT FK_listener_TO_recomment -- 수강생 -> 대댓글
+		FOREIGN KEY (
+			listener_id -- 수강생ID
+		)
+		REFERENCES listener ( -- 수강생
+			listener_id -- 수강생ID
 		);
 
 -- 멘토
@@ -497,12 +523,12 @@ ALTER TABLE mentor
 
 -- 멘토
 ALTER TABLE mentor
-	ADD CONSTRAINT FK_kategorie_TO_mentor -- 카테고리 -> 멘토
+	ADD CONSTRAINT FK_categorie_TO_mentor -- 카테고리 -> 멘토
 		FOREIGN KEY (
-			kategorie_num -- 카테고리 번호
+			categorie_num -- 카테고리 번호
 		)
-		REFERENCES kategorie ( -- 카테고리
-			kategorie_num -- 카테고리 번호
+		REFERENCES categorie ( -- 카테고리
+			categorie_num -- 카테고리 번호
 		);
 
 -- 멘토링
@@ -525,25 +551,6 @@ ALTER TABLE mentoring
 			id -- 회원 아이디
 		);
 
--- 강의 별점
-ALTER TABLE lecture_grade
-	ADD CONSTRAINT FK_lecture_TO_lecture_grade -- 강의 -> 강의 별점
-		FOREIGN KEY (
-			lecture_id -- 강의 아이디
-		)
-		REFERENCES lecture ( -- 강의
-			lecture_id -- 강의 아이디
-		);
-
--- 강의 별점
-ALTER TABLE lecture_grade
-	ADD CONSTRAINT FK_member_TO_lecture_grade -- 회원 -> 강의 별점
-		FOREIGN KEY (
-			id -- 회원 아이디
-		)
-		REFERENCES member ( -- 회원
-			id -- 회원 아이디
-		);
 
 -- 멘토링 별점
 ALTER TABLE mentoring_grade
@@ -594,6 +601,45 @@ ALTER TABLE comments
 		REFERENCES inquiry_board ( -- 1:1질문
 			inquiryid -- 질문번호
 		);
+-- 수강평
+ALTER TABLE review
+	ADD CONSTRAINT FK_listener_TO_review -- 수강생 -> 수강평
+		FOREIGN KEY (
+			listener_id -- 수강생ID
+		)
+		REFERENCES listener ( -- 수강생
+			listener_id -- 수강생ID
+		);
+
+-- 수강평
+ALTER TABLE review
+	ADD CONSTRAINT FK_lecture_TO_review -- 강의 -> 수강평
+		FOREIGN KEY (
+			lecture_id -- 강의 아이디
+		)
+		REFERENCES lecture ( -- 강의
+			lecture_id -- 강의 아이디
+		);
+
+-- 선생님답글
+ALTER TABLE t_comment
+	ADD CONSTRAINT FK_review_TO_t_comment -- 수강평 -> 선생님답글
+		FOREIGN KEY (
+			review_id -- 수강평번호
+		)
+		REFERENCES review ( -- 수강평
+			review_id -- 수강평번호
+		);
+
+-- 선생님답글
+ALTER TABLE t_comment
+	ADD CONSTRAINT FK_teacher_TO_t_comment -- 강사 -> 선생님답글
+		FOREIGN KEY (
+			teacher_id -- 강사아이디
+		)
+		REFERENCES teacher ( -- 강사
+			teacher_id -- 강사아이디
+		);
         
 -- 멤버 데이터
 -- INSERT INTO member(name, id, password, email, birthday, address, gender, phone) VALUES('김개똥', 'abc', 'abc', 'abc@abc.com', '2000-12-11', '서울', 'M', '010-0000-0000');
@@ -609,56 +655,180 @@ INSERT INTO teacher(teacher_id, name, email, phone)  VALUES(3, '진달래', 'tea
 INSERT INTO teacher(teacher_id, name, email, phone)  VALUES(4, '선인장', 'teacher4@teacher.com', '010-5656-5656');
 
 -- 카테고리
-INSERT INTO kategorie(name) VALUES('디지털드로잉');
-INSERT INTO kategorie(name) VALUES('드로잉');
-INSERT INTO kategorie(name) VALUES('공예');
-INSERT INTO kategorie(name) VALUES('요리.음식');
-INSERT INTO kategorie(name) VALUES('음식');
-INSERT INTO kategorie(name) VALUES('베이킹.디저트');
-INSERT INTO kategorie(name) VALUES('음악');
-INSERT INTO kategorie(name) VALUES('운동');
-INSERT INTO kategorie(name) VALUES('라이프스타일');
-INSERT INTO kategorie(name) VALUES('사진.영상');
-INSERT INTO kategorie(name) VALUES('금융.제테크');
-INSERT INTO kategorie(name) VALUES('창업.부업');
-INSERT INTO kategorie(name) VALUES('성공마인드');
-INSERT INTO kategorie(name) VALUES('프로그래밍');
+INSERT INTO categorie(cname) VALUES('개발 · 프로그래밍');
+INSERT INTO categorie(cname) VALUES('보안 · 네트워크');
+INSERT INTO categorie(cname) VALUES('데이터 사이언스');
+INSERT INTO categorie(cname) VALUES('게임 개발');
+INSERT INTO categorie(cname) VALUES('크리에이티브');
+INSERT INTO categorie(cname) VALUES('직무 · 마케팅');
+INSERT INTO categorie(cname) VALUES('학문 · 외국어');
+INSERT INTO categorie(cname) VALUES('커리어');
+INSERT INTO categorie(cname) VALUES('교양');
+
 
 -- d카테고리
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(1,'일러스트');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(1,'컨셉아트');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(1,'캐릭터드로잉');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(2,'펜.연필');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(2,'마카');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(2,'색연필');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(3,'대바늘 뜨개');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(3,'자수');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(3,'실 공예');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(4,'한식');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(4,'일식');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(4,'양식');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(5,'케이크');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(5,'제과');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(5,'제빵');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(6,'악기');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(6,'보컬.랩');
-INSERT INTO dtail_kategorie(kategorie_num,title ) VALUES(6,'작곡.프로듀싱');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'웹 개발');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'프론트엔드');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'백엔드');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'풀스택');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'모바일 앱 개발');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'게임 개발');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'프로그래밍 언어');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(1,'데이터베이스');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(2,'보안');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(2,'네트워크');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(2,'시스템');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(3,'데이터 분석');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(3,'인공지능');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(3,'데이터 시각화');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(3,'데이터 수집 · 처리 ');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(4,'게임 프로그래밍');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(4,'게임 기획');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(4,'게임 아트 · 그래픽 ');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(5,'웹 퍼블리싱');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(5,'UX/UI');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(5,'그래픽 디자인');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(5,'사진 · 영상');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(6,'오피스');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(6,'마케팅');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(6,'업무 자동화');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(6,'경영');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(7,'수학');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(7,'외국어');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(8,'취업 · 이직');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(8,'개인 브랜딩');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(8,'창업');
+INSERT INTO detail_categorie(categorie_num,dname ) VALUES(9,'교양');
 
 -- 강의
-insert into lecture (kategorie_num, dtail_num, teacher_id, name, price, video, image, date, discount, about_lecture, introduce, curriculum ) 
-values (1,1,2,'첫번째강의','30000원','','',curdate(), 1,'첫번째강의입니다','첫번째 강의 소개','커리큘럼입니다');
-insert into lecture (kategorie_num, dtail_num, teacher_id, name, price, video, image, date, discount, about_lecture, introduce, curriculum ) 
-values (1,1,2,'두번째강의','10000원','','',curdate(), 1,'두번째강의입니다','첫번째 강의 소개','커리큘럼입니다');
-insert into lecture (kategorie_num, dtail_num, teacher_id, name, price, video, image, date, discount, about_lecture, introduce, curriculum ) 
-values (1,1,2,'세번째강의','20000원','','',curdate(), 1,'세번째강의입니다','첫번째 강의 소개','커리큘럼입니다');
-insert into lecture (kategorie_num, dtail_num, teacher_id, name, price, video, image, date, discount, about_lecture, introduce, curriculum ) 
-values (1,1,2,'네번째강의','40000원','','',curdate(), 1,'네번째강의입니다','첫번째 강의 소개','커리큘럼입니다');
-insert into lecture (kategorie_num, dtail_num, teacher_id, name, price, video, image, date, discount, about_lecture, introduce, curriculum ) 
-values (1,1,2,'다섯번째강의','50000원','','',curdate(), 1,'다섯번째강의입니다','첫번째 강의 소개','커리큘럼입니다');
-insert into lecture (kategorie_num, dtail_num, teacher_id, name, price, video, image, date, discount, about_lecture, introduce, curriculum ) 
-values (1,1,2,'여섯번째강의','60000원','','',curdate(), 1,'여섯번째강의입니다','첫번째 강의 소개','커리큘럼입니다');
-insert into lecture (kategorie_num, dtail_num, teacher_id, name, price, video, image, date, discount, about_lecture, introduce, curriculum ) 
-values (1,1,2,'일곱번째강의','70000원','','',curdate(), 1,'일곱번째강의입니다','첫번째 강의 소개','커리큘럼입니다');
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName)values (1,1,1,'[인프런x코드캠프] 시작은 프리캠프', 22000, 95, '입문', '무제한',
+'입문자를 위해 준비한
+[웹 개발, 프론트엔드] 강의입니다.
+코딩 부트캠프의 독보적인 커리큘럼으로 만든 강의입니다. 가장 기초적이고 실무에서 꼭 필요한 내용들로 구성되어 있어요. "누구나 가능한 개발자로의 커리어 전환" 이 강의로 시작하세요.',
+'precamp.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (1,1,1,'[인프런x코드캠프] 강력한 CSS', 22000, 95, '초급','무제한',
+'초급자를 위해 준비한
+[웹 개발, 웹 퍼블리싱] 강의입니다.
+CSS만 집요하게 모아놓은 강의 보셨나요? 이 강의에서는 총 2가지 프로젝트를 진행하면서, 가장 기본적인 레이아웃 구성부터 반응형까지 구현하게 될 거에요! 자, 이제 준비되셨다면 시작해볼까요?',
+'css.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (1,1,1,'[인프런x코드캠프] 훈훈한 Javascript', 22000, 95, '입문', '무제한',
+'입문자를 위해 준비한
+[프로그래밍 언어, 웹 개발] 강의입니다.
+다른 언어도 많은데.. 왜 자바스크립트여야 하냐구요? 자바스크립트는 전세계에서 가장 많이 쓰는 언어로, 비전공자도 빠르게 배울 수 있고 이해하기 쉬운 구조를 가지고 있어요. 게다가 구글, 페이팔, 아마존 등 유명 기업들도 활용하고 있다니! 더 이상의 고민이 필요한가요?',
+'js.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (9,9,2,'시작해보세요! 당신의 첫 지식공유', 22000, 100, '입문', '무제한',
+'입문자를 위해 준비한
+[커리어, 교양] 강의입니다.
+예비 지식공유자 님, 어서오세요! 인프런입니다 :D 지식공유자는 인프런에서 강의를 제작하는 강사를 의미해요. 강의 주제 선정, 기획, 촬영 방법 및 편집까지 전부 알려드릴게요. 인프런에서 나누고 배우고 성장하세요!',
+'329442-eng.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (1,1,2,'스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술', 22000, 100, '초급', '무제한',
+'초급자를 위해 준비한
+[웹 개발, 백엔드] 강의입니다.
+스프링 입문자가 예제를 만들어가면서 스프링 웹 애플리케이션 개발 전반을 빠르게 학습할 수 있습니다.',
+'325630-eng.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (1,7,1,'코딩 입문자를 위한 파이썬 기초', 22000, 100, '입문', '무제한',
+'입문자를 위해 준비한
+[프로그래밍 언어] 강의입니다.
+코딩에 입문하는 분들을 위한 강의 입니다. 파이썬 기초를 스타트코딩만의 쉬운 설명으로 머리에 쏙쏙 들어오도록 만들어 드립니다.',
+'330054-original.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (1,1,1,'웹 게임을 만들며 배우는 React', 22000, 100, '초급', '무제한',
+'초급자를 위해 준비한
+[웹 개발, 프론트엔드] 강의입니다.
+웹게임을 통해 리액트를 배워봅니다. Class, Hooks를 모두 익히며, Context API와 React Router, 웹팩, 바벨까지 추가로 배웁니다.',
+'3c856a69-e213-4394-8317-1469386b82cc.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (1,3,1,'인프런 퇴근길 밋-업 #01 Node.js 다시보기', 22000, 100, '초급', '무제한',
+'초급자를 위해 준비한
+[백엔드, 개발 · 프로그래밍] 강의입니다.',
+'meetup2.jpg'
+);
+insert into lecture (categorie_num,detail_num, teacher_id,title, price,discount,level,date,about_lecture,fileName )values (1,7,1,'핵심만 빠르게, 입문자를 위한 파이썬(Python)과 판다스(Pandas)', 22000, 100, '입문', '무제한',
+'입문자를 위해 준비한
+[데이터 분석, 데이터 사이언스] 강의입니다.
+파이썬(Python)과 판다스(Pandas) 라이브러리의 핵심적인 개념을 빠르게 익힐 수 있는 강의입니다. 각 파트 뒤에 있는 연습 문제를 함께 해결해 나가며 프로그래밍 역량을 향상시켜보세요!',
+'329493-eng.jpg'
+);
+-- 수강생
+insert into listener (id, lecture_id) values ('abb',1);
+insert into listener (id, lecture_id) values ('abc',1);
+insert into listener (id, lecture_id) values ('acc',1);
+insert into listener (id, lecture_id) values ('add',1);
+insert into listener (id, lecture_id) values ('abb',2);
+insert into listener (id, lecture_id) values ('abc',2);
+insert into listener (id, lecture_id) values ('acc',2);
+insert into listener (id, lecture_id) values ('add',2);
+insert into listener (id, lecture_id) values ('abb',3);
+insert into listener (id, lecture_id) values ('abc',3);
+insert into listener (id, lecture_id) values ('acc',3);
+insert into listener (id, lecture_id) values ('add',3);
+insert into listener (id, lecture_id) values ('abb',4);
+insert into listener (id, lecture_id) values ('abc',4);
+insert into listener (id, lecture_id) values ('acc',4);
+insert into listener (id, lecture_id) values ('add',4);
+insert into listener (id, lecture_id) values ('abb',5);
+insert into listener (id, lecture_id) values ('abc',5);
+insert into listener (id, lecture_id) values ('acc',5);
+insert into listener (id, lecture_id) values ('add',5);
+insert into listener (id, lecture_id) values ('abb',6);
+insert into listener (id, lecture_id) values ('abc',6);
+insert into listener (id, lecture_id) values ('acc',6);
+insert into listener (id, lecture_id) values ('add',6);
+insert into listener (id, lecture_id) values ('abb',7);
+insert into listener (id, lecture_id) values ('abc',7);
+insert into listener (id, lecture_id) values ('acc',7);
+insert into listener (id, lecture_id) values ('add',7);
+insert into listener (id, lecture_id) values ('abb',8);
+insert into listener (id, lecture_id) values ('abc',8);
+insert into listener (id, lecture_id) values ('acc',8);
+insert into listener (id, lecture_id) values ('add',8);
+insert into listener (id, lecture_id) values ('abb',9);
+insert into listener (id, lecture_id) values ('abc',9);
+insert into listener (id, lecture_id) values ('acc',9);
+insert into listener (id, lecture_id) values ('add',9);
+
+-- 수강평
+insert into review (listener_id, lecture_id, content, date, score) values (1,1,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (2,1,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (3,1,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (4,1,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (1,2,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (2,2,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (3,2,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (4,2,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (1,3,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (2,3,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (3,3,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (4,3,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (1,4,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (2,4,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (3,4,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (4,4,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (1,5,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (2,5,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (3,5,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (4,5,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (1,6,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (2,6,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (3,6,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (4,6,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (1,7,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (2,7,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (3,7,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (4,7,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (1,8,'유익한 강의입니다.',curdate(),3);
+insert into review (listener_id, lecture_id, content, date, score) values (2,8,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (3,8,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (4,8,'유익한 강의입니다.',curdate(),5);
+insert into review (listener_id, lecture_id, content, date, score) values (1,9,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (2,9,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (3,9,'유익한 강의입니다.',curdate(),4);
+insert into review (listener_id, lecture_id, content, date, score) values (4,9,'유익한 강의입니다.',curdate(),4);
 
 -- 찜목록
 INSERT INTO wish_list(id, lecture_id) VALUES('abb', 1);
@@ -749,10 +919,10 @@ INSERT INTO recomment(comment_id,content,image ) VALUES(10,'감사합니다7',''
 INSERT INTO admin(id,password ) VALUES('admin','1234');
 
 -- 멘토
-INSERT INTO mentor(id, kategorie_num, email, name, phone, job, current, content, career) VALUES('abb', 1, 'gasdfd@naver.com', '멘토1', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는멘토1입니다', '백엔드2년' );
-INSERT INTO mentor(id, kategorie_num, email, name, phone, job, content, career) VALUES('abc', 1, 'gasdfd@naver.com', '멘토2', '010-1111-1111', '프론트엔드/웹퍼블리셔', '저는멘토2입니다', '프론트엔드3년' );
-INSERT INTO mentor(id, kategorie_num, email, name, phone, job, current, content, career) VALUES('acc', 2, 'gasdfd@naver.com', '멘토3', '010-1111-1111', '백엔드/서버개발자', '카카오', '저는멘토3입니다', '백엔드4년' );
-INSERT INTO mentor(id, kategorie_num, email, name, phone, job, content, career) VALUES('add', 2, 'gasdfd@naver.com', '멘토4', '010-1111-1111', '데이터 엔지니어', '저는멘토4입니다', '백엔드5년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content, career) VALUES('abb', 1, 'gasdfd@naver.com', '멘토1', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는멘토1입니다', '백엔드2년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, content, career) VALUES('abc', 1, 'gasdfd@naver.com', '멘토2', '010-1111-1111', '프론트엔드/웹퍼블리셔', '저는멘토2입니다', '프론트엔드3년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content, career) VALUES('acc', 2, 'gasdfd@naver.com', '멘토3', '010-1111-1111', '백엔드/서버개발자', '카카오', '저는멘토3입니다', '백엔드4년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, content, career) VALUES('add', 2, 'gasdfd@naver.com', '멘토4', '010-1111-1111', '데이터 엔지니어', '저는멘토4입니다', '백엔드5년' );
 
 -- 멘토링
 INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
@@ -823,8 +993,8 @@ select * from qna_board;
 select * from teacher;
 select * from comment;
 select * from lecture;
-select * from kategorie;
-select * from dtail_kategorie;
+select * from categorie;
+select * from dtail_categorie;
 select * from listener;
 select * from recomment;
 select * from admin;
