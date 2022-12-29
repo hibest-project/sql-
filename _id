@@ -919,21 +919,20 @@ INSERT INTO recomment(comment_id,content,image ) VALUES(10,'감사합니다7',''
 INSERT INTO admin(id,password ) VALUES('admin','1234');
 
 -- 멘토
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content, career) VALUES('abb', 1, 'gasdfd@naver.com', '멘토1', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는멘토1입니다', '백엔드2년' );
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, content, career) VALUES('abc', 1, 'gasdfd@naver.com', '멘토2', '010-1111-1111', '프론트엔드/웹퍼블리셔', '저는멘토2입니다', '프론트엔드3년' );
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content, career) VALUES('acc', 2, 'gasdfd@naver.com', '멘토3', '010-1111-1111', '백엔드/서버개발자', '카카오', '저는멘토3입니다', '백엔드4년' );
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, content, career) VALUES('add', 2, 'gasdfd@naver.com', '멘토4', '010-1111-1111', '데이터 엔지니어', '저는멘토4입니다', '백엔드5년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('abb', 1, 'redsword@naver.com', '박홍도', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는 박홍도 게임을 좋아합니다', '백엔드5년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('abc', 1, 'eastjin@naver.com', '강동진', '010-1111-1111', '프론트엔드/웹퍼블리셔', '배민', '저는 강동진 색칠놀이중입니다', '프론트엔드2년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('acc', 2, 'chalice@naver.com', '전성배', '010-1111-1111', '백엔드/서버 개발자', '카카오', '저는 전성배 서버 그 자체입니다', '백엔드4년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('add', 2, 'twobrush@naver.com', '박솔이', '010-1111-1111', '데이터 엔지니어', '쿠팡', '저는 박솔이 쿠팡을 좋아합니다', '백엔드5년' );
 
 -- 멘토링
 INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
-VALUES(1, 'abb',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '1우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
+VALUES(1, 'abb',  '신입~주니어 백엔드 상담 및 고민', '네이버에서 백엔드교육을 진행하는 개발자 박홍도입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '50,000원 ' );
 INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
-VALUES(2, 'abc',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '2우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
+VALUES(2, 'abc',  '먹는 이야기 하실분 구합니다', '배민 강동진입니다.', '먹을거 좋아하는 선배/멘토 개발자가', '5회 멘토링 : 2시간30분 ', '100,000원 ' );
 INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
-VALUES(3, 'acc',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '3우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
+VALUES(3, 'acc',  '백엔드 개발자의 성장을 위한 멘토링 & 코드 리뷰', '카카오 전성배입니다.', '-  Zoom을 이용한 1:1 화상회의 방식\n -  또는 오프라인 미팅', '3회 멘토링 : 1시간30분 ', '150,000원 ' );
 INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
-VALUES(4, 'add',  '신입~주니어 개발자 취직, 이력서&프론트엔드 상담 및 고민, 커리어 및 로드맵 설계', '4우아한형제들에서 우아한테크코스의 프론트엔드 교육을 진행하는 개발자 장현석입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '27,500원 ' );
-
+VALUES(4, 'add',  '데이터 분야 커리어 패스 / 서류 / 면접 멘토링', '쿠팡 db 박솔이입니다', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '80,000원 ' );
 
 -- 강의 별점
 INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 10 );
