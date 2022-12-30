@@ -209,9 +209,9 @@ CREATE TABLE mentor (
 	email         VARCHAR(100) NULL,     -- 멘토 이메일
 	name          VARCHAR(20)  NULL,     -- 멘토 이름
 	phone         VARCHAR(13)  NULL,     -- 멘토 전화번호
-    	job			  VARCHAR(30)  NULL,     -- 멘토 직무
-    	current 	  VARCHAR(30)  NULL,     -- 멘토 현직
-	content       VARCHAR(150) NULL,     -- 멘토 소개
+	job	      VARCHAR(30)  NULL,     -- 멘토 직무
+	current       VARCHAR(30)  NULL,     -- 멘토 현직
+	mentor_content VARCHAR(150) NULL,     -- 멘토 소개
 	career        VARCHAR(150) NULL,      -- 멘토 경력
     PRIMARY KEY (
 			mentor_id -- 멘토 아이디
@@ -221,14 +221,14 @@ CREATE TABLE mentor (
 
 -- 멘토링
 CREATE TABLE mentoring (
-	mentoring_id INT(5)       NOT NULL AUTO_INCREMENT,-- 새 컬럼
-	mentor_id    INT(5)       NULL,     -- 멘토 아이디
-	id           VARCHAR(100) NULL,     -- 회원 아이디
-	title        VARCHAR(50)  NULL,     -- 멘토링 글제목
-	content      VARCHAR(500) NULL,     -- 멘토링 글내용
-	rule         VARCHAR(100) NULL,     -- 멘토링 진행방식
-	time         VARCHAR(20)  NULL,     -- 멘토링 시간
-	price        VARCHAR(15)  NULL,      -- 멘토링 가격
+	mentoring_id        INT(5)       NOT NULL AUTO_INCREMENT,-- 새 컬럼
+	mentor_id           INT(5)       NULL,     -- 멘토 아이디
+	id                  VARCHAR(100) NULL,     -- 회원 아이디
+	title               VARCHAR(50)  NULL,     -- 멘토링 글제목
+	mentoring_content   VARCHAR(500) NULL,     -- 멘토링 글내용
+	rule                VARCHAR(100) NULL,     -- 멘토링 진행방식
+	time                VARCHAR(20)  NULL,     -- 멘토링 시간
+	price               VARCHAR(15)  NULL,      -- 멘토링 가격
     PRIMARY KEY (
 			mentoring_id -- 새 컬럼
 		)
@@ -251,11 +251,11 @@ CREATE TABLE lecture_grade (
 
 -- 멘토링 별점
 CREATE TABLE mentoring_grade (
-	m_grade      INT(5)       NOT NULL AUTO_INCREMENT, -- 별점 번호
-	mentoring_id INT(5)       NULL,     -- 새 컬럼
-	id           VARCHAR(100) NULL,     -- 회원 아이디
-	content      VARCHAR(500) NULL,     -- 내용
-	score        INT(11)      NULL,      -- 별점
+	m_grade            INT(5)       NOT NULL AUTO_INCREMENT, -- 별점 번호
+	mentoring_id       INT(5)       NULL,     -- 새 컬럼
+	id                 VARCHAR(100) NULL,     -- 회원 아이디
+	grade_content      VARCHAR(500) NULL,     -- 내용
+	score        	   INT(11)      NULL,      -- 별점
     PRIMARY KEY (
 			m_grade -- 별점 번호
 		)
@@ -919,19 +919,19 @@ INSERT INTO recomment(comment_id,content,image ) VALUES(10,'감사합니다7',''
 INSERT INTO admin(id,password ) VALUES('admin','1234');
 
 -- 멘토
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('abb', 1, 'redsword@naver.com', '박홍도', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는 박홍도 게임을 좋아합니다', '백엔드5년' );
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('abc', 1, 'eastjin@naver.com', '강동진', '010-1111-1111', '프론트엔드/웹퍼블리셔', '배민', '저는 강동진 색칠놀이중입니다', '프론트엔드2년' );
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('acc', 2, 'chalice@naver.com', '전성배', '010-1111-1111', '백엔드/서버 개발자', '카카오', '저는 전성배 서버 그 자체입니다', '백엔드4년' );
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, content_, career) VALUES('add', 2, 'twobrush@naver.com', '박솔이', '010-1111-1111', '데이터 엔지니어', '쿠팡', '저는 박솔이 쿠팡을 좋아합니다', '백엔드5년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('abb', 1, 'redsword@naver.com', '박홍도', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는 박홍도 게임을 좋아합니다', '백엔드5년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('abc', 1, 'eastjin@naver.com', '강동진', '010-1111-1111', '프론트엔드/웹퍼블리셔', '배민', '저는 강동진 색칠놀이중입니다', '프론트엔드2년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('acc', 2, 'chalice@naver.com', '전성배', '010-1111-1111', '백엔드/서버 개발자', '카카오', '저는 전성배 서버 그 자체입니다', '백엔드4년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('add', 2, 'twobrush@naver.com', '박솔이', '010-1111-1111', '데이터 엔지니어', '쿠팡', '저는 박솔이 쿠팡을 좋아합니다', '백엔드5년' );
 
 -- 멘토링
-INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
 VALUES(1, 'abb',  '신입~주니어 백엔드 상담 및 고민', '네이버에서 백엔드교육을 진행하는 개발자 박홍도입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '50,000원 ' );
-INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
 VALUES(2, 'abc',  '먹는 이야기 하실분 구합니다', '배민 강동진입니다.', '먹을거 좋아하는 선배/멘토 개발자가', '5회 멘토링 : 2시간30분 ', '100,000원 ' );
-INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
 VALUES(3, 'acc',  '백엔드 개발자의 성장을 위한 멘토링 & 코드 리뷰', '카카오 전성배입니다.', '-  Zoom을 이용한 1:1 화상회의 방식\n -  또는 오프라인 미팅', '3회 멘토링 : 1시간30분 ', '150,000원 ' );
-INSERT INTO mentoring(mentor_id, id, title, content, rule, time, price) 
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
 VALUES(4, 'add',  '데이터 분야 커리어 패스 / 서류 / 면접 멘토링', '쿠팡 db 박솔이입니다', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '80,000원 ' );
 
 -- 강의 별점
@@ -946,22 +946,22 @@ INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'acc', '강�
 INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'acc', '강의가 너무 알차다9', 9 );
 
 -- 멘토링 별점
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 5 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'abb', '강의가 너무 알차다2', 3 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'abb', '강의가 너무 알차다3', 5);
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(4, 'abb', '강의가 너무 알차다4', 2);
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'abc', '강의가 너무 알차다5', 2);
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'abc', '강의가 너무 알차다6', 5);
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'abc', '강의가 너무 알차다7', 2 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(4, 'abc', '강의가 너무 알차다8', 5 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'acc', '강의가 너무 알차다9', 3 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(2, 'acc', '강의가 너무 알차다10', 3 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(3, 'acc', '강의가 너무 알차다11', 3 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(4, 'acc', '강의가 너무 알차다12', 3 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다13', 4 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다14', 2 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다15', 5 );
-INSERT INTO mentoring_grade(mentoring_id, id, content, score) VALUES(1, 'add', '강의가 너무 알차다16', 2 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 5 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(2, 'abb', '강의가 너무 알차다2', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(3, 'abb', '강의가 너무 알차다3', 5);
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(4, 'abb', '강의가 너무 알차다4', 2);
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'abc', '강의가 너무 알차다5', 2);
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(2, 'abc', '강의가 너무 알차다6', 5);
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(3, 'abc', '강의가 너무 알차다7', 2 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(4, 'abc', '강의가 너무 알차다8', 5 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'acc', '강의가 너무 알차다9', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(2, 'acc', '강의가 너무 알차다10', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(3, 'acc', '강의가 너무 알차다11', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(4, 'acc', '강의가 너무 알차다12', 3 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다13', 4 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다14', 2 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다15', 5 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다16', 2 );
 
 -- 1대1 질문
 INSERT INTO inquiry_board(id, title, content, date, email) VALUES('abc','강의를 취소하고싶은데 어떻게 해야하나요 ?', '강의가 너무 부실합니다 ','2022-12-11','qwass@naver.com');
