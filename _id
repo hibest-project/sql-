@@ -235,6 +235,17 @@ CREATE TABLE mentoring (
 )default charset =  utf8;
 
 
+-- 멘토링 별점
+CREATE TABLE mentoring_grade (
+	m_grade            INT(5)       NOT NULL AUTO_INCREMENT, -- 별점 번호
+	mentoring_id       INT(5)       NULL,     -- 새 컬럼
+	id                 VARCHAR(100) NULL,     -- 회원 아이디
+	grade_content      VARCHAR(500) NULL,     -- 내용
+	score        	   INT(11)      NULL,      -- 별점
+    PRIMARY KEY (
+			m_grade -- 별점 번호
+		)
+)default charset =  utf8;
 
 
 -- 강의 별점
@@ -246,18 +257,6 @@ CREATE TABLE lecture_grade (
 	score      INT(11)      NULL,      -- 별점
     PRIMARY KEY (
 			grade_num -- 별점 번호
-		)
-)default charset =  utf8;
-
--- 멘토링 별점
-CREATE TABLE mentoring_grade (
-	m_grade            INT(5)       NOT NULL AUTO_INCREMENT, -- 별점 번호
-	mentoring_id       INT(5)       NULL,     -- 새 컬럼
-	id                 VARCHAR(100) NULL,     -- 회원 아이디
-	grade_content      VARCHAR(500) NULL,     -- 내용
-	score        	   INT(11)      NULL,      -- 별점
-    PRIMARY KEY (
-			m_grade -- 별점 번호
 		)
 )default charset =  utf8;
 
@@ -918,32 +917,83 @@ INSERT INTO recomment(comment_id,content,image ) VALUES(10,'감사합니다7',''
 -- 관리자
 INSERT INTO admin(id,password ) VALUES('admin','1234');
 
+
 -- 멘토
-INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('abb', 1, 'redsword@naver.com', '박홍도', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는 박홍도 게임을 좋아합니다', '백엔드5년' );
+INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('abb', 1, 'redsword@naver.com', '박홍도', '010-1111-1111', '게임 클라이언트 개발자', '네이버', '저는 박홍도 게임을 좋아합니다', '백엔드4년' );
 INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('abc', 1, 'eastjin@naver.com', '강동진', '010-1111-1111', '프론트엔드/웹퍼블리셔', '배민', '저는 강동진 색칠놀이중입니다', '프론트엔드2년' );
 INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('acc', 2, 'chalice@naver.com', '전성배', '010-1111-1111', '백엔드/서버 개발자', '카카오', '저는 전성배 서버 그 자체입니다', '백엔드4년' );
 INSERT INTO mentor(id, categorie_num, email, name, phone, job, current, mentor_content, career) VALUES('add', 2, 'twobrush@naver.com', '박솔이', '010-1111-1111', '데이터 엔지니어', '쿠팡', '저는 박솔이 쿠팡을 좋아합니다', '백엔드5년' );
 
 -- 멘토링
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price)
+VALUES(1, 'abb',  '신입~주니어 백엔드 상담 및 고민',
+'저는 비전공자로 시작해 부트캠프를 거쳐 현재 4년차  백엔드 개발자로 일하고 있습니다. 첫 해에는 react를 활용해 업무를 처리하는 프론트엔드 개발자로 업무를 진행했고,
+이후에는 NodeJs를 사용하는 백엔드 업무를 수행해오고 있습니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '50,000원 ' );
 INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
-VALUES(1, 'abb',  '신입~주니어 백엔드 상담 및 고민', '네이버에서 백엔드교육을 진행하는 개발자 박홍도입니다.', '학생 혹은 주니어 연차의 개발자 분들중 이끌어주는 선배/멘토 개발자가', '1회 멘토링 : 30분 ', '50,000원 ' );
+VALUES(2, 'abc',  '먹는 이야기 하실분 구합니다', 
+'365일 배달시켜먹는 강동진입니다. 함께 먹는 이야기 해요', '먹을거 좋아하는 선배/멘토 개발자가', '1회 멘토링 : 24시간 ', '5,000원 ' );
 INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
-VALUES(2, 'abc',  '먹는 이야기 하실분 구합니다', '배민 강동진입니다.', '먹을거 좋아하는 선배/멘토 개발자가', '5회 멘토링 : 2시간30분 ', '100,000원 ' );
+VALUES(3, 'acc',  '백엔드 개발자의 성장을 위한 멘토링 & 코드 리뷰', 
+'안녕하세요, 디지털미디어디자인을 전공하고 삼성디자인멤버십을 거쳐 현재는 N사에서 프로덕트 디자이너로 근무하고 있습니다.
+ UI, UX, User Research에 대한 실무를 하고 있는 현직자로서 전반의 실질적이고 유용한 도움 드릴 수 있도록 하겠습니다. ', '-  Zoom을 이용한 1:1 화상회의 방식\n -  또는 오프라인 미팅', '3회 멘토링 : 1시간30분 ', '150,000원 ' );
 INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
-VALUES(3, 'acc',  '백엔드 개발자의 성장을 위한 멘토링 & 코드 리뷰', '카카오 전성배입니다.', '-  Zoom을 이용한 1:1 화상회의 방식\n -  또는 오프라인 미팅', '3회 멘토링 : 1시간30분 ', '150,000원 ' );
+VALUES(4, 'add',  '데이터 분야 커리어 패스 / 서류 / 면접 멘토링', 
+'저는 지금까지 대학생을 대상으로 수업/진로/진학/포트폴리오, 직장인/취업준비생을 대상으로 전공기초수업/진학/포트폴리오 관련 멘토링을 진행해 왔습니다.
+조금 더 자세히 설명드리자면, 아래와 같이 4가지로 정리할 수 있을 것 같습니다.
+1. 전공과목(과목 무관) 강의 요청 혹은 질의응답
+2. 취업을 위한 포트폴리오/코딩문제풀이
+3. 진학상담
+4. 직장인 실무 맞춤 전공수업', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '120,000원 ' );
 INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
-VALUES(4, 'add',  '데이터 분야 커리어 패스 / 서류 / 면접 멘토링', '쿠팡 db 박솔이입니다', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '80,000원 ' );
+VALUES(1, 'abb',  '서버 개발자 고민 상담소', 
+'안녕하세요, 취업 & 이직 준비하다보면 이거저거 궁금한게 많으시죠?
+저도 모든걸 알진 않지만 비슷한 고민을 해왔던 사람으로써
+조금이라도 도움이 되길 바라는 마음에 멘토링을 개설하게 되었습니다.
+사전 질문지를 통해 멘티님의 상황과 고민을 파악하여 맞춤 멘토링을 해드립니다.', '환영 공지 통해서 오픈 카톡방 주소 전달 ', '1회 멘토링 : 1시간 ', '22,000원 ' );
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
+VALUES(2, 'abc',  '프론트엔드 개발자 취업 혹은 방향성', 
+'안녕하세요.
+저는 당근마켓에서 프론트엔드 개발자로 일을 하고 있고, 최근에는 오픈소스에 관심이 많아 패키지를 많이 내봤던 것 같아요. 
+혹시나 취업준비를 하고 계시는 분들께 도움이 될까 이렇게 올려봤어요.', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '30,000원 ' );
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
+VALUES(3, 'acc',  '클라우드 개발자의 모든 것(개발, 역량, 직무, 커리어, 취업 등)', 
+'안녕하세요. 
+현재 KT 클라우드에서 Container 서비스를 개발하고 있는 6년차 개발자 입니다.  
+클라우드 분야로는 Hypervisor 4년, Container 2년으로 모든 클라우드 분야를 경험하였고, 
+그 안에서 front-end, back-end, 엔지니어링 까지 fullstack으로 개발하고 있습니다. ', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '40,000원 ' );
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
+VALUES(4, 'add',  '비전공자? 학부 출신? 당신도 할 수 있습니다!',
+'뼈문과 비전공자 출신인데, 데이터 관련 직무로 전환을 하고 싶으신 분(강추!)
+스타트업 또는 대기업으로 Data Scientist 또는 ML Engineer 신입을 목표로 취업을 준비하시는 분들(학부 출신 분들 대환영)
+Data Analyst 분들 중 좀 더 머신러닝 모델에 관심이 많아 Data Scientist 또는 ML Engineer로 이직을 준비하시는 분들
+데이터 사이언스 분야에 대해 호기심이 있으신 분들
+Data Scientist 또는 ML Engineer로 취업하기 위한 공부의 방향성이 잘 잡히지 않으시는 분', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '50,000원 ' );
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
+VALUES(1, 'abb', '개발자 신입 취업 준비 로드맵. 막막함과 고민을 한방에 해결 해드립니다.', 
+'안녕하세요. 저는 비전공자 출신으로 시작해 5년차 개발자이며 현재 토스에서 근무하고 있습니다. 또한 타플랫폼에서 1년 동안 비전공자를 대상으로 한 개발 강의를 진행하며, 50명 이상의 분들을 대상으로 멘토링 해본 경험이 있습니다. 
+아래와 같은 고민이나 어려움이 있으시다면 바로 저에게 연락주세요! 
+[대학생] 신입 개발자로 원하는 기업에 취업하고 싶은데, 공부할 것들은 많고 프로젝트를 해본 경험은 없고 어디서부터 어떻게 시작해야할지 막막하신가요?
+[면접을 보고 계신 분들] 보다 매력적인 이력서/경력기술서/포트폴리오를 만들고 합격률을 높이기 위해 고민하고 계신가요?', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '180,000원 ' );
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
+VALUES(2, 'abc',  '개인과 조직을 더 효과적으로 만들기 (개발자 취업, 이직, 역량향상, 팀 리딩)',
+'일주일에 최대 두 분까지만 Google Meet으로 온라인 코칭합니다.
+이전의 코칭 세션에 적극적으로 참여하셨던 분을 우선해서 받습니다. 
+코칭 시간 8시간 전까지 다음 자료를 미리 준비해서 이메일로 보내주시면 서로의 시간이 더 효과적으로 될 수 있습니다. 
+물론 노션 등의 링크로 전달해주셔도 됩니다.', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '280,000원 ' );
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
+VALUES(3, 'acc',  '백엔드 개발자의 성장을 위한 멘토링 & 코드 리뷰', 
+'Java, Spring, AWS 에 대한 학습
+취준, 경력 전환에 대한 고민
+주니어 개발자로서 성장에 대해
+Live PR Reiew (500 line 이하 추천)
+이력서 첨삭 및 면접 스킬, 연봉 협상 전략
+그 외 멘티가 원하는 모든 이야기', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '380,000원 ' );
+INSERT INTO mentoring(mentor_id, id, title, mentoring_content, rule, time, price) 
+VALUES(4, 'add',  '비전공자 개발자 / 데이터 / 주니어 커리어 / 면접 / 외국어', 
+'안녕하세요 :)
+비전공자에서 데이터 엔지니어가 되기까지 다양한 경험을 한 개발자입니다.
+여태 다녀본 회사도 다양해서 회사에 대해 궁금한 점도 알려드릴 수 있을 것 같아요.', '오픈카톡방을 통해 사전 질문 전달 ', '1회 멘토링 : 50분 ', '480,000원 ' );
 
--- 강의 별점
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 10 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'abb', '강의가 너무 알차다2', 9 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'abb', '강의가 너무 알차다3', 7 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(1, 'abc', '강의가 너무 알차다4', 9 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'abc', '강의가 너무 알차다5', 6 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'abc', '강의가 너무 알차다6', 5 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(1, 'acc', '강의가 너무 알차다7', 8 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'acc', '강의가 너무 알차다8', 8 );
-INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'acc', '강의가 너무 알차다9', 9 );
 
 -- 멘토링 별점
 INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 5 );
@@ -959,9 +1009,21 @@ INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(2, 'a
 INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(3, 'acc', '강의가 너무 알차다11', 3 );
 INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(4, 'acc', '강의가 너무 알차다12', 3 );
 INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다13', 4 );
-INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다14', 2 );
-INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다15', 5 );
-INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(1, 'add', '강의가 너무 알차다16', 2 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(2, 'add', '강의가 너무 알차다14', 2 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(3, 'add', '강의가 너무 알차다15', 5 );
+INSERT INTO mentoring_grade(mentoring_id, id, grade_content, score) VALUES(4, 'add', '강의가 너무 알차다16', 2 );
+
+
+-- 강의 별점
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(1, 'abb', '강의가 너무 알차다1', 10 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'abb', '강의가 너무 알차다2', 9 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'abb', '강의가 너무 알차다3', 7 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(1, 'abc', '강의가 너무 알차다4', 9 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'abc', '강의가 너무 알차다5', 6 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'abc', '강의가 너무 알차다6', 5 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(1, 'acc', '강의가 너무 알차다7', 8 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(2, 'acc', '강의가 너무 알차다8', 8 );
+INSERT INTO lecture_grade(lecture_id, id, content, score) VALUES(3, 'acc', '강의가 너무 알차다9', 9 );
 
 -- 1대1 질문
 INSERT INTO inquiry_board(id, title, content, date, email) VALUES('abc','강의를 취소하고싶은데 어떻게 해야하나요 ?', '강의가 너무 부실합니다 ','2022-12-11','qwass@naver.com');
